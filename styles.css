@@ -62,6 +62,8 @@ button:focus {
     background-color: #4caf50;
     color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    z-index: 10;
 }
 
 .yes-btn:hover {
@@ -82,31 +84,34 @@ button:focus {
 .no-btn:hover {
     background-color: #e43e3e;
     transform: scale(1.05);
+    animation: moveButton 0.5s ease-in-out infinite;
 }
 
 /* Mobile-friendly adjustments */
 @media (max-width: 768px) {
     .btn-group {
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
+    }
+
+    .yes-btn {
+        position: static;
+        width: 100%;
     }
 
     .no-btn {
-        position: absolute;
-        top: 60%;
-        right: auto;
-        left: auto;
-        transform: translateY(-50%);
-        animation: moveButton 0.5s ease-in-out;
+        position: static;
+        width: 100%;
+        animation: moveButton 0.5s ease-in-out infinite;
     }
 }
 
-/* Add some playful animation for the "No" button on hover */
+/* Add playful animation for the "No" button */
 @keyframes moveButton {
     0%, 100% {
-        transform: translate(10px, -50%);
+        transform: translateX(5px);
     }
     50% {
-        transform: translate(-10px, -50%);
+        transform: translateX(-5px);
     }
 }
