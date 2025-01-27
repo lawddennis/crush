@@ -4,6 +4,7 @@ $(document).ready(function () {
     const $question = $(".question");
     const $gif = $(".gif");
     const $wrapper = $(".wrapper");
+    let hoverInterval;
 
     // Change text and gif when the Yes button is clicked
     $yesBtn.on("click", function () {
@@ -27,8 +28,8 @@ $(document).ready(function () {
         const maxY = wrapperRect.height - noBtnRect.height;
 
         // Generate random positions within bounds
-        const randomX = Math.min(Math.random() * maxX, maxX);
-        const randomY = Math.min(Math.random() * maxY, maxY);
+        const randomX = Math.random() * maxX;
+        const randomY = Math.random() * maxY;
 
         // Apply the random position to the "No" button
         $noBtn.css({
@@ -37,6 +38,16 @@ $(document).ready(function () {
         });
     }
 
-    // Make the No button move randomly on hover or click
-    $noBtn.on("mouseover click", moveNoButton);
+    // Move the "No" button every frame when hovering
+    $noBtn.on("mouseenter", function () {
+        hoverInterval = setInterval(moveNoButton, 200); // Move every 200ms
+    });
+
+    // Stop moving when the mouse leaves the button
+    $noBtn.on("mouseleave", function () {
+        clearInterval(hoverInterval);
+    });
+
+    // Move the button on click as well
+    $noBtn.on("click", moveNoButton);
 });
