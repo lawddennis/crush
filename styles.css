@@ -39,8 +39,9 @@ body {
 
 .btn-group {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     gap: 15px;
+    position: relative;
 }
 
 button {
@@ -69,13 +70,43 @@ button:focus {
 }
 
 .no-btn {
-    position: absolute;
     background-color: #ff4d4d;
     color: white;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(50%, -50%);
 }
 
 .no-btn:hover {
     background-color: #e43e3e;
     transform: scale(1.05);
+}
+
+/* Mobile-friendly adjustments */
+@media (max-width: 768px) {
+    .btn-group {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .no-btn {
+        position: absolute;
+        top: 60%;
+        right: auto;
+        left: auto;
+        transform: translateY(-50%);
+        animation: moveButton 0.5s ease-in-out;
+    }
+}
+
+/* Add some playful animation for the "No" button on hover */
+@keyframes moveButton {
+    0%, 100% {
+        transform: translate(10px, -50%);
+    }
+    50% {
+        transform: translate(-10px, -50%);
+    }
 }
